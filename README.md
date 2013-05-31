@@ -56,14 +56,14 @@ The native extension is using ruby's rake for it's build system and therefore re
 
 To build simply type `rake build` into your terminal from within the root directory of the native extension.  If this is your first time building the build system will generate the file `config/build.yml` and prompt you to edit the file for your system.  The relevant changes are the path to your Adobe Air SDK and what version of the iOS SDK you are using.
 
-After editing your `config/build.yml` file, simply type `rake build` again.  If all goes well you will see the `TestFlight.ane` file sitting in your `bin` directory.
+After editing your `config/build.yml` file, simply type `rake build` again.  If all goes well you will see the `airejdb.ane` file sitting in your `bin` directory.
 
-Since this is a multiplatform ANE building is a bit more complicated then usual. If you are running on Mac OS X you will find a file called `ejdb-build.sh` in the `config` directory. Before executing the rake script you will want to run this script via `sh ejdb-build.sh` to generate the Mac and iOS universal binaries of ejdb, as well as download the windows libraries of ejdb.
+Since this is a multiplatform ANE, building is a bit more complicated then usual. If you are running on Mac OS X you will find a file called `ejdb-build.sh` in the `config` directory. Before executing the rake script you will want to run this script via `sh ejdb-build.sh` to generate the Mac and iOS universal binaries of ejdb, as well as download the windows libraries of ejdb.
 
 You will then need to find a way to build the windows MSVC solution found in `platforms/windows/AirEJDB.sln`, I personally use Visual C++ Express 2010 via Parallels running Windows 7. After compiling the MSVC solution, the rake script will compile the iOS and Mac native libraries, then package all available platforms.
 
 ## License
-airejdb is licensed under a permissive MIT source license. Fork well my friends.
+airejdb is licensed under a permissive MIT source license. EJDB and Tokyo Cabinet, which this project depends on are licensed under the GNU Lesser General Public License. Fork well my friends.
 
 	Copyright (c) 2013 Justin Walsh, http://thejustinwalsh.com/
 
