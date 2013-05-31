@@ -1,0 +1,69 @@
+<!-- 
+Copyright (c) 2013 Justin Walsh, http://thejustinwalsh.com/
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<extension xmlns="http://ns.adobe.com/air/extension/3.7">
+  <id>com.thejustinwalsh.ane.EJDB</id>
+  <versionNumber>1</versionNumber>
+  <platforms>
+  	<!--
+  	<platform name="Android-ARM">
+		<applicationDeployment>
+			<nativeLibrary>ejdb.so</nativeLibrary>
+			<initializer>AirEJDBExtInitializer</initializer>
+			<finalizer>AirEJDBExtFinalizer</finalizer>
+		</applicationDeployment>
+    </platform>
+    <platform name="iPhone-x86">
+		<applicationDeployment>
+			<nativeLibrary>libairejdb.a</nativeLibrary>
+			<initializer>AirEJDBExtInitializer</initializer>
+			<finalizer>AirEJDBExtFinalizer</finalizer>
+		</applicationDeployment>
+    </platform>
+    -->
+  	<platform name="iPhone-ARM">
+		<applicationDeployment>
+			<nativeLibrary>libairejdb.a</nativeLibrary>
+			<initializer>AirEJDBExtInitializer</initializer>
+			<finalizer>AirEJDBExtFinalizer</finalizer>
+		</applicationDeployment>
+    </platform>
+    <platform name="Windows-x86">
+		<applicationDeployment>
+			<nativeLibrary>AirEJDB.dll</nativeLibrary>
+			<initializer>AirEJDBExtInitializer</initializer>
+			<finalizer>AirEJDBExtFinalizer</finalizer>
+		</applicationDeployment>
+    </platform>
+    <platform name="MacOS-x86">
+		<applicationDeployment>
+			<nativeLibrary>AirEJDB.framework</nativeLibrary>
+			<initializer>AirEJDBExtInitializer</initializer>
+			<finalizer>AirEJDBExtFinalizer</finalizer>
+		</applicationDeployment>
+    </platform>
+    <platform name="default"> 
+		<applicationDeployment/> 
+	</platform> 
+  </platforms>
+</extension>

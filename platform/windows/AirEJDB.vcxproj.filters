@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{b1cd05c2-5423-441e-bfa9-ec290bea72a2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\shared\AirEJDB.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\AirEJDBHelpers.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\ContextData.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\CursorData.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\shared\AirEJDB.cc">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\AirEJDBHelpers.cc">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\ContextData.cc">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\CursorData.cc">
+      <Filter>Shared</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+[submodule "tests/vendor/asunit"]
+	path = tests/vendor/asunit
+	url = git://github.com/patternpark/asunit.git
+[submodule "vendor/ejdb"]
+	path = vendor/ejdb
+	url = git://github.com/Softmotions/ejdb.git

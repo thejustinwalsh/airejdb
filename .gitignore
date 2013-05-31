@@ -1,0 +1,35 @@
+/tests/bin/
+/tests/.settings/
+/bin/airejdb/
+/bin/default/
+
+# Xcode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata
+*.moved-aside
+
+# MSVC
+*.suo
+*.user
+/.settings/
+/samples/ejdb-hello-ios/.settings/
+/samples/ejdb-hello-ios/bin-debug/
+/samples/ejdb-hello/.settings/
+/platform/windows/include/
+/platform/windows/lib/
+/platform/windows/Release/
+/platform/windows/share/
+/platform/macos/include/
+/platform/macos/lib/
+/platform/macos/share/
+/platform/ios/build/
+/platform/ios/include/
+/platform/ios/lib/
+/platform/ios/share/

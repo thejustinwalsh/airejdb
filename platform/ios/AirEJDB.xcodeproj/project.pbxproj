@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5CDBD1411757CA200067DDA7 /* AirEJDB.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBD1391757CA200067DDA7 /* AirEJDB.cc */; };
+		5CDBD1421757CA200067DDA7 /* AirEJDBHelpers.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBD13B1757CA200067DDA7 /* AirEJDBHelpers.cc */; };
+		5CDBD1431757CA200067DDA7 /* ContextData.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBD13D1757CA200067DDA7 /* ContextData.cc */; };
+		5CDBD1441757CA200067DDA7 /* CursorData.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBD13F1757CA200067DDA7 /* CursorData.cc */; };
+		5CDBD1461757CA300067DDA7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDBD1451757CA300067DDA7 /* libz.dylib */; };
+		5CDBD1481757CA360067DDA7 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDBD1471757CA360067DDA7 /* libm.dylib */; };
+		5CDBD14A1757CA560067DDA7 /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDBD1491757CA560067DDA7 /* libpthread.dylib */; };
+		5CDBD14C1757CA8C0067DDA7 /* libtcejdb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDBD14B1757CA8C0067DDA7 /* libtcejdb.a */; };
+		5CDBD14D1757CF300067DDA7 /* libairejdb.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CDBD1271757C9E00067DDA7 /* libairejdb.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5CDBD1251757C9E00067DDA7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = $SRCROOT/bin/;
+			dstSubfolderSpec = 0;
+			files = (
+				5CDBD14D1757CF300067DDA7 /* libairejdb.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5C0C389A1757E49C008F5D33 /* DebugEJDBAirApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DebugEJDBAirApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C0C389B1757E49D008F5D33 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5C0C389D1757E49D008F5D33 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5C0C389F1757E49D008F5D33 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5C0C38B71757E550008F5D33 /* debugIPA.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = debugIPA.sh; sourceTree = "<group>"; };
+		5CDBD1271757C9E00067DDA7 /* libairejdb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libairejdb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CDBD12E1757C9E00067DDA7 /* AirEJDB-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirEJDB-Prefix.pch"; sourceTree = "<group>"; };
+		5CDBD1391757CA200067DDA7 /* AirEJDB.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirEJDB.cc; path = ../../shared/AirEJDB.cc; sourceTree = "<group>"; };
+		5CDBD13A1757CA200067DDA7 /* AirEJDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirEJDB.h; path = ../../shared/AirEJDB.h; sourceTree = "<group>"; };
+		5CDBD13B1757CA200067DDA7 /* AirEJDBHelpers.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirEJDBHelpers.cc; path = ../../shared/AirEJDBHelpers.cc; sourceTree = "<group>"; };
+		5CDBD13C1757CA200067DDA7 /* AirEJDBHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirEJDBHelpers.h; path = ../../shared/AirEJDBHelpers.h; sourceTree = "<group>"; };
+		5CDBD13D1757CA200067DDA7 /* ContextData.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ContextData.cc; path = ../../shared/ContextData.cc; sourceTree = "<group>"; };
+		5CDBD13E1757CA200067DDA7 /* ContextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContextData.h; path = ../../shared/ContextData.h; sourceTree = "<group>"; };
+		5CDBD13F1757CA200067DDA7 /* CursorData.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CursorData.cc; path = ../../shared/CursorData.cc; sourceTree = "<group>"; };
+		5CDBD1401757CA200067DDA7 /* CursorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CursorData.h; path = ../../shared/CursorData.h; sourceTree = "<group>"; };
+		5CDBD1451757CA300067DDA7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		5CDBD1471757CA360067DDA7 /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
+		5CDBD1491757CA560067DDA7 /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
+		5CDBD14B1757CA8C0067DDA7 /* libtcejdb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtcejdb.a; path = lib/libtcejdb.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5CDBD1241757C9E00067DDA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CDBD14A1757CA560067DDA7 /* libpthread.dylib in Frameworks */,
+				5CDBD1481757CA360067DDA7 /* libm.dylib in Frameworks */,
+				5CDBD1461757CA300067DDA7 /* libz.dylib in Frameworks */,
+				5CDBD14C1757CA8C0067DDA7 /* libtcejdb.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5CDBD11E1757C9E00067DDA7 = {
+			isa = PBXGroup;
+			children = (
+				5CDBD12C1757C9E00067DDA7 /* AirEJDB */,
+				5CDBD1291757C9E00067DDA7 /* Frameworks */,
+				5CDBD1281757C9E00067DDA7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5CDBD1281757C9E00067DDA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5CDBD1271757C9E00067DDA7 /* libairejdb.a */,
+				5C0C389A1757E49C008F5D33 /* DebugEJDBAirApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CDBD1291757C9E00067DDA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5CDBD14B1757CA8C0067DDA7 /* libtcejdb.a */,
+				5CDBD1491757CA560067DDA7 /* libpthread.dylib */,
+				5CDBD1471757CA360067DDA7 /* libm.dylib */,
+				5CDBD1451757CA300067DDA7 /* libz.dylib */,
+				5C0C389B1757E49D008F5D33 /* UIKit.framework */,
+				5C0C389D1757E49D008F5D33 /* Foundation.framework */,
+				5C0C389F1757E49D008F5D33 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5CDBD12C1757C9E00067DDA7 /* AirEJDB */ = {
+			isa = PBXGroup;
+			children = (
+				5CDBD1381757CA120067DDA7 /* shared */,
+				5CDBD12D1757C9E00067DDA7 /* Supporting Files */,
+			);
+			path = AirEJDB;
+			sourceTree = "<group>";
+		};
+		5CDBD12D1757C9E00067DDA7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C0C38B71757E550008F5D33 /* debugIPA.sh */,
+				5CDBD12E1757C9E00067DDA7 /* AirEJDB-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5CDBD1381757CA120067DDA7 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				5CDBD1391757CA200067DDA7 /* AirEJDB.cc */,
+				5CDBD13A1757CA200067DDA7 /* AirEJDB.h */,
+				5CDBD13B1757CA200067DDA7 /* AirEJDBHelpers.cc */,
+				5CDBD13C1757CA200067DDA7 /* AirEJDBHelpers.h */,
+				5CDBD13D1757CA200067DDA7 /* ContextData.cc */,
+				5CDBD13E1757CA200067DDA7 /* ContextData.h */,
+				5CDBD13F1757CA200067DDA7 /* CursorData.cc */,
+				5CDBD1401757CA200067DDA7 /* CursorData.h */,
+			);
+			name = shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C0C38991757E49C008F5D33 /* DebugEJDBAirApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C0C38B51757E49D008F5D33 /* Build configuration list for PBXNativeTarget "DebugEJDBAirApp" */;
+			buildPhases = (
+				5C0C38B61757E4EB008F5D33 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DebugEJDBAirApp;
+			productName = DebugEJDBAirApp;
+			productReference = 5C0C389A1757E49C008F5D33 /* DebugEJDBAirApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5CDBD1261757C9E00067DDA7 /* AirEJDB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CDBD1351757C9E00067DDA7 /* Build configuration list for PBXNativeTarget "AirEJDB" */;
+			buildPhases = (
+				5CDBD1231757C9E00067DDA7 /* Sources */,
+				5CDBD1241757C9E00067DDA7 /* Frameworks */,
+				5CDBD1251757C9E00067DDA7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirEJDB;
+			productName = AirEJDB;
+			productReference = 5CDBD1271757C9E00067DDA7 /* libairejdb.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5CDBD11F1757C9E00067DDA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Justin Walsh";
+			};
+			buildConfigurationList = 5CDBD1221757C9E00067DDA7 /* Build configuration list for PBXProject "AirEJDB" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5CDBD11E1757C9E00067DDA7;
+			productRefGroup = 5CDBD1281757C9E00067DDA7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5CDBD1261757C9E00067DDA7 /* AirEJDB */,
+				5C0C38991757E49C008F5D33 /* DebugEJDBAirApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C0C38B61757E4EB008F5D33 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "chmod 755 \"$PROJECT_DIR/$PROJECT_NAME/debugIPA.sh\"\n\"$PROJECT_DIR/$PROJECT_NAME/debugIPA.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CDBD1231757C9E00067DDA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CDBD1411757CA200067DDA7 /* AirEJDB.cc in Sources */,
+				5CDBD1421757CA200067DDA7 /* AirEJDBHelpers.cc in Sources */,
+				5CDBD1431757CA200067DDA7 /* ContextData.cc in Sources */,
+				5CDBD1441757CA200067DDA7 /* CursorData.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5C0C38B31757E49D008F5D33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5C0C38B41757E49D008F5D33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5CDBD1331757C9E00067DDA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"${AIR_SDK}/include\" \"/Applications/Adobe\\ Flash\\ Builder\\ 4.7/sdks/4.6.0/include\" \"./include\"";
+				VALID_ARCHS = armv7;
+			};
+			name = Debug;
+		};
+		5CDBD1341757C9E00067DDA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"${AIR_SDK}/include\" \"/Applications/Adobe\\ Flash\\ Builder\\ 4.7/sdks/4.6.0/include\" \"./include\"";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
+			};
+			name = Release;
+		};
+		5CDBD1361757C9E00067DDA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/AirEJDB.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirEJDB/AirEJDB-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/lib\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = airejdb;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Debug;
+		};
+		5CDBD1371757C9E00067DDA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/AirEJDB.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirEJDB/AirEJDB-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/lib\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = airejdb;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C0C38B51757E49D008F5D33 /* Build configuration list for PBXNativeTarget "DebugEJDBAirApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C0C38B31757E49D008F5D33 /* Debug */,
+				5C0C38B41757E49D008F5D33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CDBD1221757C9E00067DDA7 /* Build configuration list for PBXProject "AirEJDB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CDBD1331757C9E00067DDA7 /* Debug */,
+				5CDBD1341757C9E00067DDA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CDBD1351757C9E00067DDA7 /* Build configuration list for PBXNativeTarget "AirEJDB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CDBD1361757C9E00067DDA7 /* Debug */,
+				5CDBD1371757C9E00067DDA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5CDBD11F1757C9E00067DDA7 /* Project object */;
+}
