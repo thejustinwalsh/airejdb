@@ -7,9 +7,9 @@ package com.thejustinwalsh.data
 
 		}
 
-		public function next():void
+		public function next():Boolean
 		{
-
+			return false;
 		}
 		
 		public function get hasNext():Boolean
@@ -50,6 +50,11 @@ package com.thejustinwalsh.data
 		public function close():void
 		{
 			
+		}
+		
+		public function toArray():Array
+		{
+			return [];
 		}
 	}
 }

@@ -18,7 +18,7 @@ package com.thejustinwalsh.data
 			return false;
 		}
 		
-		public function ensureCollection(collection:String, options:Object):void
+		public function ensureCollection(collection:String, options:EJDBCollectionOptions):void
 		{
 			
 		}
@@ -28,7 +28,7 @@ package com.thejustinwalsh.data
 			
 		}
 
-		public function save(collection:String, objects:Array):Array
+		public function save(collection:String, ...args):Array
 		{
 			return null;
 		}
@@ -43,22 +43,22 @@ package com.thejustinwalsh.data
 
 		}
 
-		public function find(collection:String, query:Object, orQueryArray:Array, hints:Object):* // Number, Cursor
+		public function find(collection:String, query:Object, orQueryArray:Array = null, hints:Object = null):EJDBCursor
 		{
 			return null;
 		}
 
-		public function findOne(collection:String, query:Object, orQueryArray:Array, hints:Object):Object
+		public function findOne(collection:String, query:Object, orQueryArray:Array = null, hints:Object = null):Object
 		{
 			return null;
 		}
 
-		public function update(collection:String, query:Object, orQueryArray:Array, hints:Object):Number
+		public function update(collection:String, query:Object, orQueryArray:Array = null, hints:Object = null):Number
 		{
 			return Number.NaN;
 		}
 
-		public function count(collection:String, query:Object, orQueryArray:Array, hints:Object):Number
+		public function count(collection:String, query:Object, orQueryArray:Array = null, hints:Object = null):Number
 		{
 			return Number.NaN;
 		}

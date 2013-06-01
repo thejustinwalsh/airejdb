@@ -33,3 +33,4 @@ xcuserdata
 /platform/ios/include/
 /platform/ios/lib/
 /platform/ios/share/
+/platform/macos/build/
