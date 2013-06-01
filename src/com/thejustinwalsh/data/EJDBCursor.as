@@ -86,10 +86,11 @@ package com.thejustinwalsh.data
 			if (!_cursorContext.valid) throw new Error("Cursor is closed");
 			var curPos:uint = pos;
 			var objects:Array = [];
+			
 			reset();
-			do {
+			while (next()) {
 				objects.push(object());
-			} while (next());
+			} 
 			
 			pos = curPos;
 			return objects;

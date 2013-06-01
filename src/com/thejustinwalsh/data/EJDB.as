@@ -25,7 +25,7 @@ package com.thejustinwalsh.data
 				(oid.charCodeAt(i) >= 0x61 && oid.charCodeAt(i) <= 0x66)); /* a - f */
 				++i);
 			return (i === 24);
-		};
+		}
 		
 		public static function open(database:String, mode:uint = DEFAULT_OPEN_MODE, async:Boolean = false):EJDBImplementation
 		{
