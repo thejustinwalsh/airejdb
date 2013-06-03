@@ -49,8 +49,6 @@ db.close(); // Close the database
 ## Considerations
 Database files are memory mapped and limited to 2GB on all 32bit platforms. This applies to all supported platforms in the ANE since Adobe only supports 32bit extensions.
 
-On the windows platoform, the native extension is dependent on `tcejdbdll.dll`. You will need to release your AIR application with this dll copied into the working directory of your application, or placed into a shared windows location that is in the windows path enviroment. This makes it less then ideal to debug or run your code from Flash Builder as well. I've found that placing the `tcejdbdll.dll` next to the version of `adt` you are running works quite well for debugging. As far as I know, there is no way to bundle the external DLL into the native extension and have it load from there. If anyone knows a better way to pull it off let me know.
-
 ## Building
 The native extension is using ruby's rake for it's build system and therefore requires ruby 1.9.3, this is installed by default on OS X Lion.  Additionally, you must have Xcode and the iOS SDK's installed on your system.
 

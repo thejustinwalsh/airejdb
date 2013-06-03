@@ -167,10 +167,10 @@ rm -rf include
 rm -rf lib
 rm -rf share
 
-curl -OL https://dl.dropboxusercontent.com/u/4709222/ejdb/tcejdb-1.1.10-mingw32-i686.zip
+curl -OL https://dl.dropboxusercontent.com/u/4709222/ejdb/tcejdb-1.1.11-mingw32-i686.zip
 
-unzip tcejdb-1.1.10-mingw32-i686.zip
-rm tcejdb-1.1.10-mingw32-i686.zip
+unzip tcejdb-1.1.11-mingw32-i686.zip
+rm tcejdb-1.1.11-mingw32-i686.zip
 
 popd
 

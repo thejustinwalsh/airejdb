@@ -48,7 +48,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;AIREJDB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EJDB_STATIC;WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;AIREJDB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./include;../shared;C:\AdobeAirSDK\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -57,11 +57,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>.\lib;C:\AdobeAirSDK\lib\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>FlashRuntimeExtensions.lib;tcejdbdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>FlashRuntimeExtensions.lib;libmingwex.a;libgcc.a;libz.a;libpcreposix.a;libpcre.a;libwinpthread.a;libtcejdb.a;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y $(OutDir)$(TargetFileName) bin\$(TargetFileName);
-copy /Y lib\tcejdbdll.dll bin\tcejdbdll.dll;</Command>
+      <Command>copy /Y $(OutDir)$(TargetFileName) bin\$(TargetFileName);</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,10 +70,11 @@ copy /Y lib\tcejdbdll.dll bin\tcejdbdll.dll;</Command>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;AIREJDB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EJDB_STATIC;WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;AIREJDB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./include;../shared;C:\AdobeAirSDK\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -82,11 +82,12 @@ copy /Y lib\tcejdbdll.dll bin\tcejdbdll.dll;</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>.\lib;C:\AdobeAirSDK\lib\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>FlashRuntimeExtensions.lib;tcejdbdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmingwex.a;libgcc.a;libz.a;libpcreposix.a;libpcre.a;libwinpthread.a;libtcejdb.a;FlashRuntimeExtensions.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y $(OutDir)$(TargetFileName) bin\$(TargetFileName);
-copy /Y lib\tcejdbdll.dll bin\tcejdbdll.dll;</Command>
+      <Command>copy /Y $(OutDir)$(TargetFileName) bin\$(TargetFileName);</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
