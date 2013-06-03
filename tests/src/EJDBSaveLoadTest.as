@@ -60,15 +60,11 @@ package
 			
 			var oids:Array = db.save("parrots", parrot1, null, parrot2);
 			assertNotNull(oids);
-			assertEquals(2, oids.length);
+			assertEquals(3, oids.length);
 			
-			// TODO: Need to modify the behaivor to match this test data...
 			assertEquals(parrot1["_id"], oids[0]);
 			assertEquals(null, oids[1]);
 			assertEquals(parrot2["_id"], oids[2]);
-			
-			//assertEquals(parrot1["_id"], oids[0]);
-			//assertEquals(parrot2["_id"], oids[1]);
 			
 			var parrot2Clone:Object = db.load("parrots", parrot2["_id"]);
 			assertNotNull(parrot2Clone);

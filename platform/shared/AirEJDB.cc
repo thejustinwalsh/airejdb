@@ -281,6 +281,10 @@ FREObject AirEJDBSave(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     FREObject defaultOptions = argv[5];
     
     EJCOLL *coll = _GetCollection(ejdb, collection, defaultOptions);
+    if (!coll) {
+        _Log("ejdbcreatecoll: %s", ejdberrmsg(ejdbecode(ejdb)));
+        return 0;
+    }
     
     uint32_t length = 0;
     FREGetArrayLength(keys, &length);
@@ -292,6 +296,8 @@ FREObject AirEJDBSave(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     
     _Log("Saving %d key(s)...", length);
     for (uint32_t i = 0; i < length; ++i) {
+        FREObject oidValue = 0;
+        
         // Get the keys, values, and types for the current object
         FREObject oKeys;
         FREGetArrayElementAt(keys, i, &oKeys);
@@ -300,32 +306,36 @@ FREObject AirEJDBSave(FREContext ctx, void* funcData, uint32_t argc, FREObject a
         FREObject oTypes;
         FREGetArrayElementAt(types, i, &oTypes);
         
-        // Create the object
-        bson *b = _FREObjectToBson(oKeys, oValues, oTypes);
-        bson_finish(b);
-        
-        // Store the object
-        bson_oid_t oid;
-        FREObject oidValue = 0;
-        bool success = ejdbsavebson(coll, b, &oid);
-        if (success) {
-            char oidString[25];
-            uint32_t oidStringLength = 0;
-            oidStringLength = strlen(oidString);
-            bson_oid_to_string(&oid, oidString);
-            FRENewObjectFromUTF8(25, (const uint8_t*)oidString, &oidValue);
-            _Log("New OID: %s", oidString);
-        }
-        else {
-            _Log("Invalid OID, record not saved");
-            _Log(ejdberrmsg(ejdbecode(ejdb)));
+        FREObjectType oKeysType;
+        FREGetObjectType(oKeys, &oKeysType);
+        if (oKeysType == FRE_TYPE_ARRAY) {
+            // Create the object
+            bson *b = _FREObjectToBson(oKeys, oValues, oTypes);
+            bson_finish(b);
+            
+            // Store the object
+            bson_oid_t oid;
+            
+            bool success = ejdbsavebson(coll, b, &oid);
+            if (success) {
+                char oidString[25];
+                uint32_t oidStringLength = 0;
+                oidStringLength = strlen(oidString);
+                bson_oid_to_string(&oid, oidString);
+                FRENewObjectFromUTF8(25, (const uint8_t*)oidString, &oidValue);
+                _Log("New OID: %s", oidString);
+            }
+            else {
+                _Log("Invalid OID, record not saved");
+                _Log(ejdberrmsg(ejdbecode(ejdb)));
+            }
+            
+            // Destroy the object from memory
+            bson_destroy(b);
         }
         
         // Put the new oid back into the return array
         FRESetArrayElementAt(oids, i, oidValue);
-        
-        // Destroy the object from memory
-        bson_destroy(b);
     }
     
     return oids;

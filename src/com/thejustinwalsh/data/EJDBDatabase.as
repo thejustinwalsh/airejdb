@@ -46,23 +46,26 @@ package com.thejustinwalsh.data
 			if (objects.length > 0 && objects[0] is Array) objects = objects[0];
 			var keys:Array = [], values:Array = [], types:Array = [];
 			
-			var validObjects:Array = [];
 			for (var i:int = 0, n:int = objects.length; i < n; ++i) {
 				var object:Object = objects[i];
 				var type:String = getQualifiedClassName(object); 
-				if (type != "Object") continue;
+				if (type == "Object") {
+					if (object.hasOwnProperty("_id") && object._id != "" && !EJDB.isValidOID(object._id)) throw new ArgumentError("OID("+object._id+") is invalid");
 				
-				if (object.hasOwnProperty("_id") && object._id != "" && !EJDB.isValidOID(object._id)) throw new ArgumentError("OID("+object._id+") is invalid");
-				
-				var objectKeys:Array = [], objectValues:Array = [], objectTypes:Array = [];
-				EJDBSerializer.toKeyValuePair(object, objectKeys, objectValues, objectTypes);
-				keys.push(objectKeys); values.push(objectValues); types.push(objectTypes);
-				validObjects.push(object);
+					var objectKeys:Array = [], objectValues:Array = [], objectTypes:Array = [];
+					EJDBSerializer.toKeyValuePair(object, objectKeys, objectValues, objectTypes);
+					keys.push(objectKeys); values.push(objectValues); types.push(objectTypes);
+				}
+				else {
+					keys.push(null); values.push(null); types.push(null);
+				}
 			}
 			
 			var defaultOptions:EJDBCollectionOptions = new EJDBCollectionOptions();
 			var oids:Array = EJDB.extContext.call("db.save", _dbContext, collection, keys, values, types, defaultOptions.toObject()) as Array;
-			for (i = 0, n = validObjects.length; i < n; ++i) validObjects[i]._id = oids[i];
+			for (i = 0, n = objects.length; i < n; ++i) {
+				if (oids[i]) objects[i]._id = oids[i];
+			}
 			return oids;
 		}
 
