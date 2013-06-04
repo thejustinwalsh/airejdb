@@ -81,6 +81,11 @@ package com.thejustinwalsh.data
 			EJDB.extContext.call("cursor.close", _cursorContext);
 		}
 		
+		public function log():String
+		{
+			return _cursorContext.info;
+		}
+		
 		public function toArray():Array
 		{
 			if (!_cursorContext.valid) throw new Error("Cursor is closed");

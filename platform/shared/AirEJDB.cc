@@ -279,7 +279,8 @@ FREObject AirEJDBSave(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     FREObject keys = argv[2];
     FREObject values = argv[3];
     FREObject types = argv[4];
-    FREObject defaultOptions = argv[5];
+    FREObject merge = argv[5];
+    FREObject defaultOptions = argv[6];
     
     EJCOLL *coll = _GetCollection(ejdb, collection, defaultOptions);
     if (!coll) {
@@ -294,6 +295,9 @@ FREObject AirEJDBSave(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     FREObject oids;
     FRENewObject((const uint8_t*)"Array", 0, 0, &oids, 0);
     FRESetArrayLength(oids, length);
+    
+    uint32_t mergeOption = 0;
+    FREGetObjectAsBool(merge, &mergeOption);
     
     _Log("Saving %d key(s)...", length);
     for (uint32_t i = 0; i < length; ++i) {
@@ -317,7 +321,7 @@ FREObject AirEJDBSave(FREContext ctx, void* funcData, uint32_t argc, FREObject a
             // Store the object
             bson_oid_t oid;
             
-            bool success = ejdbsavebson(coll, b, &oid);
+            bool success = ejdbsavebson2(coll, b, &oid, mergeOption != 0);
             if (success) {
                 char oidString[25];
                 uint32_t oidStringLength = 0;
@@ -429,27 +433,59 @@ FREObject AirEJDBFind(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     FREObject hintsValues = argv[9];
     FREObject hintsTypes = argv[10];
 
-    EJCOLL *coll = _GetCollection(ejdb, collection, 0);
-    if (!coll) {
-        _Log("ejdbcreatecoll: %s", ejdberrmsg(ejdbecode(ejdb)));
-        return 0;
-    }
-    
     bson *query = _FREObjectToBson(queryKeys, queryValues, queryTypes, 0, 0, true);
     bson_finish(query);
  
     bson *hints = _FREObjectToBson(hintsKeys, hintsValues, hintsTypes, 0, 0, true);
     bson_finish(hints);
     
+    bson orArrayStack[8];
     bson *orArray = 0;
     uint32_t orArrayLength = 0;
+    uint32_t orArrayIndex = 0;
     FREGetArrayLength(orArrayKeys, &orArrayLength);
     if (orArrayLength > 0) {
-        orArray = _FREObjectToBson(orArrayKeys, orArrayValues, orArrayTypes, 0, 0, true);
-        bson_finish(orArray);
+        orArray = (orArrayLength <= 8 ? orArrayStack : (bson*)malloc(orArrayLength * sizeof(bson)));
+        for (int i = 0; i < orArrayLength; ++i) {
+            FREObject arrayValue;
+            FREGetArrayElementAt(orArrayValues, i, &arrayValue);
+            FREObject arrayType;
+            FREGetArrayElementAt(orArrayTypes, i, &arrayType);
+            
+            uint32_t length;
+            const char *strArrayType;
+            FREGetObjectAsUTF8(arrayType, &length, (const uint8_t**)&strArrayType);
+            if (!!strcmp(strArrayType, "Object")) continue;
+            
+            FREObject subKeys;
+            FREGetObjectProperty(arrayValue, (const uint8_t*)"keys", &subKeys, 0);
+            FREObject subValues;
+            FREGetObjectProperty(arrayValue, (const uint8_t*)"values", &subValues, 0);
+            FREObject subTypes;
+            FREGetObjectProperty(arrayValue, (const uint8_t*)"types", &subTypes, 0);
+            
+            bson *orObject = _FREObjectToBson(subKeys, subValues, subTypes);
+            bson_finish(orObject);
+            orArray[orArrayIndex++] = *orObject;
+        }
     }
     
-    EJQ* q = ejdbcreatequery(ejdb, query, orArray, orArrayLength, hints);
+    const char *collectionName;
+    uint32_t collectionNameLength;
+    FREGetObjectAsUTF8(collection, &collectionNameLength, (const uint8_t**)&collectionName);
+    EJCOLL *coll = ejdbgetcoll(ejdb, collectionName);
+    if (!coll) {
+        bson_iterator it;
+        if (query && bson_find(&it, query, "$upsert") == BSON_OBJECT) {
+            coll = ejdbcreatecoll(ejdb, collectionName, 0);
+            if (!coll) { _Log("ejdbcreatecoll: %s", ejdberrmsg(ejdbecode(ejdb))); return 0; }
+        }
+        else {
+            return 0;
+        }
+    }
+    
+    EJQ* q = ejdbcreatequery(ejdb, query, orArray, orArrayIndex, hints);
     if (!q) {
         _Log("ejdbcreatequery: %s", ejdberrmsg(ejdbecode(ejdb)));
         return 0;
@@ -500,7 +536,8 @@ FREObject AirEJDBFind(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     tcxstrdel(log);
     bson_destroy(query);
     bson_destroy(hints);
-    bson_destroy(orArray);
+    for (int i = 0; i < orArrayIndex; ++i) bson_destroy(&orArray[i]);
+    if (orArray && orArray != orArrayStack) free(orArray);
 
     return cursorContext;
 }

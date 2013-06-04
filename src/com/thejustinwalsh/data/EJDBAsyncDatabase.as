@@ -28,7 +28,7 @@ package com.thejustinwalsh.data
 			
 		}
 
-		public function save(collection:String, ...args):Array
+		public function save(collection:String, objects:Array, options:Object = null):Array
 		{
 			return null;
 		}

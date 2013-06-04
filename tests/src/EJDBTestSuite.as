@@ -11,6 +11,7 @@ package
 			addTest(new EJDBSaveLoadTest());
 			addTest(new EJDBReadmeSampleTest());
 			addTest(new EJDBQueryTest());
+			addTest(new EJDBUpdateTest());
 		}
 	}
 }

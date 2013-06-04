@@ -45,7 +45,7 @@ package
 				"likes" : ["sugar cane"],
 				"extra1" : null
 			};
-			db.save("parrots", parrot1, parrot2);
+			db.save("parrots", [parrot1, parrot2]);
 		}
 		
 		protected override function tearDown():void
@@ -116,6 +116,36 @@ package
 				assertEquals("sugar cane", rv["likes"].join(","));
 				assertEquals("sugar cane", cursor.field("likes").join(","));
 			}
+		}
+		
+		public function testQuery3():void
+		{
+			var cursor:EJDBCursor = db.find("parrots", {}, [{name : "Grenny"}, {name : "Bounty"}], {$orderby : {name : 1}});
+			assertNotNull(cursor);
+			assertEquals(2, cursor.length);
+			
+			for (var c:int = 0; cursor.next(); ++c) {
+				var rv:Object = cursor.object();
+				if (c != 1) continue;
+				assertEquals("Grenny", rv["name"]);
+				assertEquals("Grenny", cursor.field("name"));
+				assertEquals("African Grey", rv["type"]);
+				assertEquals("African Grey", cursor.field("type"));
+				assertEquals(true, rv["male"]);
+				assertEquals(true, cursor.field("male"));
+				assertEquals(1, rv["age"]);
+				assertEquals(1, cursor.field("age"));
+				assertEquals(now.toString(), rv["birthdate"].toString());
+				assertEquals(now.toString(), cursor.field("birthdate").toString());
+				assertEquals("green color,night,toys", rv["likes"].join(","));
+				assertEquals("green color,night,toys", cursor.field("likes").join(","));
+			}
+			
+			cursor.reset();
+			for (c = 0; cursor.next(); ++c);
+			assertEquals(2, c);
+			
+			cursor.close();
 		}
 	}
 }

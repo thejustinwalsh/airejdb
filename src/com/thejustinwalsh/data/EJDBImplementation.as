@@ -8,7 +8,7 @@ package com.thejustinwalsh.data
 		function ensureCollection(collection:String, options:EJDBCollectionOptions):void;
 		function dropCollection(collection:String, prune:Boolean):void;
 
-		function save(collection:String, ...args):Array;
+		function save(collection:String, objects:Array, options:Object = null):Array;
 		function load(collection:String, oid:String):Object;
 		function remove(collection:String, oid:String):void;
 		

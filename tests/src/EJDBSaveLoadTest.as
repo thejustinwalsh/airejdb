@@ -4,8 +4,11 @@ package
 	import com.thejustinwalsh.data.EJDBDatabase;
 	
 	import flash.filesystem.File;
+	import flash.utils.ByteArray;
 	
 	import asunit.framework.TestCase;
+	
+	import avmplus.getQualifiedClassName;
 	
 	public class EJDBSaveLoadTest extends TestCase
 	{
@@ -32,7 +35,6 @@ package
 			db.close();
 			
 			File.applicationStorageDirectory.resolvePath("ejdb-save-load-test").deleteFile();
-			File.applicationStorageDirectory.resolvePath("ejdb-save-load-test_parrots").deleteFile();
 		}
 		
 		public function testSaveLoad():void
@@ -59,7 +61,7 @@ package
 				"extra1" : null
 			};
 			
-			var oids:Array = db.save("parrots", parrot1, null, parrot2);
+			var oids:Array = db.save("parrots", [parrot1, null, parrot2]);
 			assertNotNull(oids);
 			assertEquals(3, oids.length);
 			
@@ -71,6 +73,45 @@ package
 			assertNotNull(parrot2Clone);
 			assertEquals(parrot2Clone._id, parrot2["_id"]);
 			assertEquals(parrot2Clone.name, "Bounty");
+			
+			db.dropCollection("parrots", true);
+		}
+		
+		public function testSaveLoadBuffer():void
+		{
+			assertNotNull(db);
+			assertTrue(db.isOpen);
+			
+			var secret:ByteArray = new ByteArray();
+			secret.writeUTFBytes("Some binary secret");
+			
+			var sally:Object = {
+				name: "Sally",
+				mood: "Angry",
+				secret: secret
+			};
+			
+			var molly:Object = {
+				name: "Molly",
+				mood: "Very angry",
+				secret: null
+			};
+			
+			var oids:Array = db.save("birds", [sally]);
+			assertNotNull(oids);
+			assertEquals(1, oids.length);
+			assertNotNull(sally["_id"]);
+			
+			var sallyOid:String = sally._id;
+			var sallyObj:Object = db.load("birds", sallyOid);
+			assertEquals(getQualifiedClassName(ByteArray), getQualifiedClassName(sallyObj["secret"]));
+			assertEquals("Some binary secret", (sallyObj.secret as ByteArray).readUTFBytes((sallyObj.secret as ByteArray).bytesAvailable));			
+			
+			oids = db.save("birds", [sally, molly]);
+			assertNotNull(oids);
+			assertTrue(oids.indexOf(sallyOid) !== -1);
+			
+			db.dropCollection("birds", true);
 		}
 	}
 }

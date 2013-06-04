@@ -39,13 +39,12 @@ package com.thejustinwalsh.data
 			EJDB.extContext.call("db.dropCollection", _dbContext, collection, prune);
 		}
 
-		// ...args (take a single object, an array of objects, or comma seperated object list
-		public function save(collection:String, ...args):Array
+		public function save(collection:String, objects:Array, options:Object = null):Array
 		{
-			var objects:Array = args;
-			if (objects.length > 0 && objects[0] is Array) objects = objects[0];
-			var keys:Array = [], values:Array = [], types:Array = [];
+			if (!options) options = {};
+			var merge:Boolean = options.hasOwnProperty("$merge") && options.$merge;
 			
+			var keys:Array = [], values:Array = [], types:Array = [];
 			for (var i:int = 0, n:int = objects.length; i < n; ++i) {
 				var object:Object = objects[i];
 				var type:String = getQualifiedClassName(object); 
@@ -62,7 +61,7 @@ package com.thejustinwalsh.data
 			}
 			
 			var defaultOptions:EJDBCollectionOptions = new EJDBCollectionOptions();
-			var oids:Array = EJDB.extContext.call("db.save", _dbContext, collection, keys, values, types, defaultOptions.toObject()) as Array;
+			var oids:Array = EJDB.extContext.call("db.save", _dbContext, collection, keys, values, types, merge, defaultOptions.toObject()) as Array;
 			for (i = 0, n = objects.length; i < n; ++i) {
 				if (oids[i]) objects[i]._id = oids[i];
 			}
