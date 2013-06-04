@@ -32,6 +32,7 @@ package
 			db.close();
 			
 			File.applicationStorageDirectory.resolvePath("ejdb-save-load-test").deleteFile();
+			File.applicationStorageDirectory.resolvePath("ejdb-save-load-test_parrots").deleteFile();
 		}
 		
 		public function testSaveLoad():void

@@ -249,18 +249,36 @@ bson* _FREObjectToBson(FREObject keys, FREObject values, FREObject types, bson *
             }
                 
             case FRE_TYPE_OBJECT: {
-                FREObject subKeys;
-                FREGetObjectProperty(value, (const uint8_t*)"keys", &subKeys, 0);
-                FREObject subValues;
-                FREGetObjectProperty(value, (const uint8_t*)"values", &subValues, 0);
-                FREObject subTypes;
-                FREGetObjectProperty(value, (const uint8_t*)"types", &subTypes, 0);
-                
-                bool isObject = !strcmp(typeName, "Object");
-                _Log("Key %s == \"%s\"", keyName, isObject ? "Object" : "Array");
-                isObject ? bson_append_start_object(b, keyName) : bson_append_start_array(b, keyName);
-                _FREObjectToBson(subKeys, subValues, subTypes, b, depth);
-                isObject ? bson_append_finish_object(b) : bson_append_finish_array(b);
+                if (!strcmp(typeName, "RegExp")) {
+                    // Regular Expression
+                    FREObject pattern;
+                    FREGetObjectProperty(value, (const uint8_t*)"pattern", &pattern, 0);
+                    FREObject options;
+                    FREGetObjectProperty(value, (const uint8_t*)"options", &options, 0);
+                    
+                    uint32_t length = 0;
+                    const char *strPattern;
+                    const char *strOptions;
+                    FREGetObjectAsUTF8(pattern, &length, (const uint8_t**)&strPattern);
+                    FREGetObjectAsUTF8(options, &length, (const uint8_t**)&strOptions);
+                    
+                    bson_append_regex(b, keyName, strPattern, strOptions);
+                }
+                else {
+                    // Object or Array
+                    FREObject subKeys;
+                    FREGetObjectProperty(value, (const uint8_t*)"keys", &subKeys, 0);
+                    FREObject subValues;
+                    FREGetObjectProperty(value, (const uint8_t*)"values", &subValues, 0);
+                    FREObject subTypes;
+                    FREGetObjectProperty(value, (const uint8_t*)"types", &subTypes, 0);
+                    
+                    bool isObject = !strcmp(typeName, "Object");
+                    _Log("Key %s == \"%s\"", keyName, isObject ? "Object" : "Array");
+                    isObject ? bson_append_start_object(b, keyName) : bson_append_start_array(b, keyName);
+                    _FREObjectToBson(subKeys, subValues, subTypes, b, depth);
+                    isObject ? bson_append_finish_object(b) : bson_append_finish_array(b);
+                }
                 break;
             }
                 
@@ -309,8 +327,7 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
 {
     switch (type) {
             
-        case BSON_OID:
-        {
+        case BSON_OID: {
             char xoid[25];
             bson_oid_to_string(bson_iterator_oid(it), xoid);
             
@@ -319,8 +336,7 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
         }
             
         case BSON_STRING:
-        case BSON_SYMBOL:
-        {
+        case BSON_SYMBOL: {
             const char *string = bson_iterator_string(it);
             uint32_t length = bson_iterator_string_len(it);
             
@@ -328,37 +344,42 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
             break;
         }
             
-        case BSON_INT:
-        {
+        case BSON_REGEX: {
+            FREObject constructorArgs[2];
+            const char *strPattern = bson_iterator_regex(it);
+            const char *strOptions = bson_iterator_regex_opts(it);
+            FRENewObjectFromUTF8(strlen(strPattern), (const uint8_t*)strPattern, &constructorArgs[0]);
+            FRENewObjectFromUTF8(strlen(strOptions), (const uint8_t*)strOptions, &constructorArgs[1]);
+            FRENewObject((const uint8_t*)"RegExp", 2, constructorArgs, value, 0);
+            break;
+        }
+            
+        case BSON_INT: {
             int integer = bson_iterator_int_raw(it);
             FRENewObjectFromInt32(int32_t(integer), value);
             break;
         }
             
-        case BSON_LONG:
-        {
+        case BSON_LONG: {
             int64_t number = bson_iterator_long_raw(it);
             FRENewObjectFromDouble((double)number, value);
             break;
         }
             
-        case BSON_DOUBLE:
-        {
+        case BSON_DOUBLE: {
             int64_t number = bson_iterator_long_raw(it);
             FRENewObjectFromDouble((double)number, value);
             break;
         }
             
-        case BSON_BOOL:
-        {
+        case BSON_BOOL: {
             int32_t boolean = bson_iterator_bool_raw(it);
             FRENewObjectFromBool(boolean, value);
             break;
         }
             
         case BSON_OBJECT:
-        case BSON_ARRAY:
-        {
+        case BSON_ARRAY: {
             bson_iterator sub_it;
             bson_iterator_subiterator(it, &sub_it);
             
@@ -366,8 +387,7 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
             break;
         }
             
-        case BSON_DATE:
-        {
+        case BSON_DATE: {
             bson_date_t date = bson_iterator_date(it);
             FREObject time;
             FRENewObjectFromDouble((double)date, &time);
@@ -379,8 +399,7 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
             break;
         }
             
-        case BSON_BINDATA:
-        {
+        case BSON_BINDATA: {
             FREObject length;
             const char *data = bson_iterator_bin_data(it);
             uint32_t dataLength = bson_iterator_bin_len(it);
@@ -398,8 +417,7 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
             
         case BSON_NULL:
         case BSON_UNDEFINED:
-        default:
-        {
+        default: {
             *value = 0;
             break;
         }

@@ -14,19 +14,7 @@ package
 		{
 			super(testMethod);
 		}
-		
-		protected override function setUp():void
-		{
-			
-		}
-		
-		
-		protected override function tearDown():void
-		{
-			File.applicationStorageDirectory.resolvePath("ejdb-database-test-1").deleteFile();
-			File.applicationStorageDirectory.resolvePath("ejdb-database-test-2").deleteFile();
-		}
-		
+				
 		public function testOpenClose():void
 		{
 			assertNotNull(EJDB.JBOWRITER);
@@ -42,6 +30,8 @@ package
 			
 			var databaseFile:File = File.applicationStorageDirectory.resolvePath("ejdb-database-test-1");
 			assertTrue(databaseFile.exists);
+			
+			File.applicationStorageDirectory.resolvePath("ejdb-database-test-1").deleteFile();
 		}
 		
 		public function testEnsureAndRemoveCollection():void
@@ -66,6 +56,8 @@ package
 			// TODO: Error handeling?
 			db.close();
 			db.dropCollection("c1", true);
+			
+			File.applicationStorageDirectory.resolvePath("ejdb-database-test-2").deleteFile();
 		}
 	}
 }

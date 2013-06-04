@@ -24,6 +24,7 @@ package
 		protected override function tearDown():void
 		{
 			File.applicationStorageDirectory.resolvePath("zoo").deleteFile();
+			File.applicationStorageDirectory.resolvePath("zoo_parrots").deleteFile();
 		}
 		
 		public function testSample():void

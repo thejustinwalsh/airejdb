@@ -51,6 +51,18 @@ package com.thejustinwalsh.data
 					toTypedArray(value, a.keys, a.values, a.types);
 					keys.push(key); values.push(a); types.push(type);
 					break;
+				
+				case getQualifiedClassName(RegExp):
+					var regexp:RegExp = value as RegExp;
+					var options:String = "";
+					if (regexp.global) options += "g";
+					if (regexp.ignoreCase) options += "i";
+					if (regexp.multiline) options += "m";
+					if (regexp.dotall) options += "s";
+					if (regexp.extended) options += "x";
+					var regexObj:Object = { pattern: regexp.source, options: options };
+					keys.push(key); values.push(regexObj); types.push(type);
+					break;
 					
 				default:
 					if (value === null) {

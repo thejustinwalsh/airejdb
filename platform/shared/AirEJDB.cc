@@ -189,6 +189,7 @@ FREObject AirEJDBClose(FREContext ctx, void* funcData, uint32_t argc, FREObject 
     ContextData *contextData = 0;
     FREGetContextNativeData(ctx, (void**)&contextData);
     std::string dbStringPath = _GetDatabseIdFromArguments(argv);
+    if (contextData->databases.find(dbStringPath) == contextData->databases.end()) { _Log("Database is closed"); return 0; }
 
     EJDB* ejdb = contextData->databases[dbStringPath];
     ejdbclose(ejdb);
@@ -200,8 +201,8 @@ FREObject AirEJDBClose(FREContext ctx, void* funcData, uint32_t argc, FREObject 
             CursorData cursorData = contextData->cursors[*cIterator];
             contextData->cursors.erase(*cIterator);
             
-            ejdbquerydel(cursorData.query); cursorData.query = 0;
-            tclistdel(cursorData.results); cursorData.results = 0;
+            if (cursorData.query) ejdbquerydel(cursorData.query); cursorData.query = 0;
+            if (cursorData.results) tclistdel(cursorData.results); cursorData.results = 0;
         }
     }
     
