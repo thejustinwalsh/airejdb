@@ -390,7 +390,7 @@ FREObject AirEJDBRemove(FREContext ctx, void* funcData, uint32_t argc, FREObject
     if (!ejdb) { _Log("Database is closed"); return 0; }
     
     FREObject collection = argv[1];
-    FREObject oid = argv[3];
+    FREObject oid = argv[2];
     
     EJCOLL *coll = _GetCollection(ejdb, collection, 0);
     if (!coll) {
