@@ -57,6 +57,7 @@ package
 				"male" : false,
 				"age" : 15,
 				"birthdate" : now,
+				"percentFun": 0.33,
 				"likes" : ["sugar cane"],
 				"extra1" : null
 			};
@@ -73,6 +74,7 @@ package
 			assertNotNull(parrot2Clone);
 			assertEquals(parrot2Clone._id, parrot2["_id"]);
 			assertEquals(parrot2Clone.name, "Bounty");
+			assertEquals(parrot2Clone.percentFun, 0.33);
 			
 			db.dropCollection("parrots", true);
 		}

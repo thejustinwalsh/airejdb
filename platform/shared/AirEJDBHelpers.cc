@@ -367,7 +367,7 @@ void _FRENewObjectFromBSON(bson_iterator *it, bson_type type, FREObject *value)
         }
             
         case BSON_DOUBLE: {
-            int64_t number = bson_iterator_long_raw(it);
+            double number = bson_iterator_double_raw(it);
             FRENewObjectFromDouble((double)number, value);
             break;
         }
