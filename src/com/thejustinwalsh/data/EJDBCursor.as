@@ -27,7 +27,6 @@ package com.thejustinwalsh.data
 		
 		public function get hasNext():Boolean
 		{
-			if (!_cursorContext.valid) throw new Error("Cursor is closed");
 			return (_cursorContext.noNext && _cursorContext.length > 0) || (_cursorContext.pos + 1 < _cursorContext.length);
 		}
 
