@@ -75,8 +75,7 @@ package com.thejustinwalsh.data
 
 		public function close():void
 		{
-			if (!_cursorContext.valid) throw new Error("Cursor is not open");
-			EJDB.extContext.call("cursor.close", _cursorContext);
+			if (_cursorContext.valid) EJDB.extContext.call("cursor.close", _cursorContext);
 		}
 		
 		public function log():String
