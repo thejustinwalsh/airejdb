@@ -13,7 +13,6 @@ package com.thejustinwalsh.data
 
 		public function next():Boolean
 		{
-			if (!_cursorContext.valid) throw new Error("Cursor is closed");
 			if (_cursorContext.noNext) {
 				_cursorContext.noNext = false;
 				return _cursorContext.length > 0;
