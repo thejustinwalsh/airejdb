@@ -115,12 +115,18 @@ void AirEJDBContextFinalizer(FREContext ctx)
     for (dbIterator = contextData->databases.begin(); dbIterator != contextData->databases.end(); ++dbIterator) {
         EJDB* ejdb = dbIterator->second;
         ejdbclose(ejdb);
+        ejdbdel(ejdb);
         
         IdList::iterator cIterator;
         IdList cursorList = contextData->openCursors[dbIterator->first];
         for (cIterator = cursorList.begin(); cIterator != cursorList.end(); ++cIterator) {
-            tclistdel(contextData->cursors[*cIterator].results);
-            contextData->cursors.erase(*cIterator);
+            if (contextData->cursors.find(*cIterator) != contextData->cursors.end()) {
+                CursorData cursorData = contextData->cursors[*cIterator];
+                contextData->cursors.erase(*cIterator);
+                
+                if (cursorData.query) ejdbquerydel(cursorData.query); cursorData.query = 0;
+                if (cursorData.results) tclistdel(cursorData.results); cursorData.results = 0;
+            }
         }
     }
     contextData->databases.clear();
@@ -193,6 +199,7 @@ FREObject AirEJDBClose(FREContext ctx, void* funcData, uint32_t argc, FREObject 
 
     EJDB* ejdb = contextData->databases[dbStringPath];
     ejdbclose(ejdb);
+    ejdbdel(ejdb);
     
     IdList::iterator cIterator;
     IdList cursorList = contextData->openCursors[dbStringPath];
@@ -486,10 +493,7 @@ FREObject AirEJDBFind(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     }
     
     EJQ* q = ejdbcreatequery(ejdb, query, orArray, orArrayIndex, hints);
-    if (!q) {
-        _Log("ejdbcreatequery: %s", ejdberrmsg(ejdbecode(ejdb)));
-        return 0;
-    }
+    if (!q) { _Log("ejdbcreatequery: %s", ejdberrmsg(ejdbecode(ejdb))); return 0; }
     
     // Get flags from hints
     uint32_t flags = 0;
@@ -502,6 +506,7 @@ FREObject AirEJDBFind(FREContext ctx, void* funcData, uint32_t argc, FREObject a
     uint32_t count = 0;
     TCXSTR *log = tcxstrnew();
     TCLIST *cursor = ejdbqryexecute(coll, q, &count, flags, log);
+    if (!cursor) { _Log("ejdbqryexecute: %s", ejdberrmsg(ejdbecode(ejdb))); return 0; }
         
     // Store the cursor in our map
     uint32_t current_id;

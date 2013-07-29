@@ -1,8 +1,10 @@
 package com.thejustinwalsh.data
 {
+	import flash.events.Event;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	import flash.filesystem.File;
+	import flash.desktop.NativeApplication;
 
 	public class EJDB
 	{
@@ -62,6 +64,7 @@ package com.thejustinwalsh.data
 				_extContext = ExtensionContext.createExtensionContext("com.thejustinwalsh.ane.EJDB", "");
 				if (!_extContext) throw new Error("Unable to aquire extension context");
 				_extContext.addEventListener(StatusEvent.STATUS, onLogEvent, false, 0, true);
+				NativeApplication.nativeApplication.addEventListener(Event.EXITING, function(e:Event):void { _extContext.dispose(); _extContext = null; });
 			}
 			
 			return _extContext;
