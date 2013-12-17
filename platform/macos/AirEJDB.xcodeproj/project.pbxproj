@@ -11,26 +11,12 @@
 		5C487CE31746F8890063E340 /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C487CE21746F8890063E340 /* libpthread.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		5C487CE51746F8930063E340 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C487CE41746F8930063E340 /* libz.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		5C487CE71746F89F0063E340 /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C487CE61746F89F0063E340 /* libm.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
-		5C4E9E49174A8E33005F4511 /* AirEJDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CB21F951746D729000C7D38 /* AirEJDB.framework */; };
 		5C997305174D70E0002B2CE7 /* AirEJDBHelpers.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5C997303174D70E0002B2CE7 /* AirEJDBHelpers.cc */; };
 		5CB21FA31746D729000C7D38 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CB21FA11746D729000C7D38 /* InfoPlist.strings */; };
 		5CB21FB01746D8BE000C7D38 /* AirEJDB.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CB21FAF1746D8BE000C7D38 /* AirEJDB.cc */; };
 		5CB21FB41746DCDB000C7D38 /* ContextData.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CB21FB21746DCDB000C7D38 /* ContextData.cc */; };
 		5CDE8BB01755978400215120 /* CursorData.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CDE8BAE1755978400215120 /* CursorData.cc */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		5C4E9E48174A8E25005F4511 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = $SRCROOT/bin;
-			dstSubfolderSpec = 0;
-			files = (
-				5C4E9E49174A8E33005F4511 /* AirEJDB.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5C487CC51746E9850063E340 /* libtcejdb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtcejdb.a; path = lib/libtcejdb.a; sourceTree = "<group>"; };
@@ -198,7 +184,7 @@
 				5CB21F911746D729000C7D38 /* Frameworks */,
 				5CB21F921746D729000C7D38 /* Headers */,
 				5CB21F931746D729000C7D38 /* Resources */,
-				5C4E9E48174A8E25005F4511 /* CopyFiles */,
+				5CA017271860D00400505BD6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -245,6 +231,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5CA017271860D00400505BD6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf ${SRCROOT}/bin/${FULL_PRODUCT_NAME}\nmkdir ${SRCROOT}/bin/${FULL_PRODUCT_NAME}\ncp -R -L ${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}/ ${SRCROOT}/bin/${FULL_PRODUCT_NAME}";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CB21F901746D729000C7D38 /* Sources */ = {
