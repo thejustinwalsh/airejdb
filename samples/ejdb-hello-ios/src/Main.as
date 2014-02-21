@@ -56,7 +56,7 @@ package
 			log("In Date: ", (epicObject.date as Date).toDateString(), (epicObject.date as Date).toTimeString(), (epicObject.date as Date).seconds, (epicObject.date as Date).milliseconds);
 			
 			db.dropCollection("world3", true);
-			var saved:Array = db.save("world3", epicObject, { hello: 'world' }, { testing: [] });
+			var saved:Array = db.save("world3", [epicObject, { hello: 'world' }, { testing: [] }]);
 			
 			for (var i:int = 0; i < saved.length; ++i) {
 				log("Index", i, "=", saved[i]);
